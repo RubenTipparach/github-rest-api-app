@@ -83,6 +83,10 @@ ____________       _____________      ____________
   * To extend on the idea of the deployment scripts, we could split the app into two separate deployments and scale them independently depending on the load.
 * Database fallback
   * Initially I had the idea of including a postgres migration script to create a DB, but it felt like overkill, and that local caching would suffice.
+* Command/Queries Segregation
+  * Create specific message formats for commands and queries. This would be building a framework around the existing code to make messages more clear if they are commands or queries.
+* Reliable Messaging
+  * Currently no guarantees if messages get handled. This is ok for a get call, but if we were writing data to a DB, might need some sort of inbox/outbox workflow to ensure messages get delivered, or have proper retry logic if for some reason a message couldn't get through due to some process error or downtime.
 
 **Example**
 * Command
