@@ -25,6 +25,7 @@ public class GithubUserReposService {
         this.userProducer = userProducer;
     }
 
+    // Maps the data according to requirements
     public GithubUserReposDto getUserRepos(String username) throws IOException {
         val userReply = this.userProducer.sendAndReceive(username);
         val reposReply = this.reposProducer.sendAndReceive(username);

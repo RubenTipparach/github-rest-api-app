@@ -49,6 +49,7 @@ public class GithubReposConsumer {
     }
 
 
+    // Consumer for get repositories request
     @RabbitListener(queues = AppConfiguration.GET_REPOS_QUEUE)
     @SendTo(AppConfiguration.GET_REPOS_QUEUE)
     public GithubReposReplyDto getRepos(String username) {
@@ -93,7 +94,8 @@ public class GithubReposConsumer {
         }
     }
 
-    public Mono<GithubRepoDto[]> getRepoMono(String username) throws RateLimitException {
+    // The web client for making the http request
+    private Mono<GithubRepoDto[]> getRepoMono(String username) throws RateLimitException {
         return webClient.get()
                 .uri("/users/{username}/repos", username)
                 .retrieve()
@@ -107,6 +109,7 @@ public class GithubReposConsumer {
                 .bodyToMono(GithubRepoDto[].class);
     }
 
+    // Sets the meta data and grabs cache data as backup if exists.
     private GithubRepoDto[] handleRateLimit(String username, GithubReposReplyDto reposDto, MetaData metaData) {
         logger.warn("Hit rate limit for GitHub.");
         if (reposCache.containsKey(username)) {

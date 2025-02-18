@@ -48,6 +48,8 @@ public class GithubUserConsumer {
         this.cacheService = cacheService;
     }
 
+    // Consumer for get User request
+    // If there is an exception for rate limits thrown, we fallback to the cache via the onErrorResume callback.
     @RabbitListener(queues = AppConfiguration.GET_USER_QUEUE)
     @SendTo(AppConfiguration.GET_USER_QUEUE)
     public GithubUserReplyDto getUser(String username) {
@@ -90,7 +92,7 @@ public class GithubUserConsumer {
 
     }
 
-    public Mono<GithubUserDto> getUserMono(String username) throws RateLimitException {
+    private Mono<GithubUserDto> getUserMono(String username) throws RateLimitException {
         return webClient.get()
                 .uri("/users/{username}", username)
                 .retrieve()
@@ -104,6 +106,7 @@ public class GithubUserConsumer {
                 .bodyToMono(GithubUserDto.class);
     }
 
+    // Sets the meta data and grabs cache data as backup if exists.
     private GithubUserDto handleRateLimit(String username, GithubUserReplyDto userDto, MetaData metaData) {
         logger.warn("Hit rate limit for GitHub.");
         if (userCache.containsKey(username)) {

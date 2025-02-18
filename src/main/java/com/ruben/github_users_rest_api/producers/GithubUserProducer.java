@@ -26,6 +26,7 @@ public class GithubUserProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
+    // makes the request to the consumer
     public GithubUserReplyDto sendAndReceive(String username) throws IOException {
 
         val response = rabbitTemplate.convertSendAndReceive(
