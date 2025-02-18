@@ -32,6 +32,4 @@ public class GithubUserReposDto {
     @JsonProperty("repos")
     private List<Repo> repos;
 
-    private MetaData userMetaData;
-    private MetaData repoMetaData;
 }

@@ -41,20 +41,12 @@ public class GithubUserReposService {
             response.setCreatedAt(user.getCreatedAt());
         }
 
-        if (userReply.getMetaData() != null) {
-            response.setUserMetaData(userReply.getMetaData());
-        }
-
         if (reposReply.getRepos() != null) {
             val repos = reposReply.getRepos();
             response.setRepos(
                     Arrays.stream(repos)
                             .map(repo -> new Repo(repo.getName(), repo.getUrl())).toList()
             );
-        }
-
-        if (reposReply.getMetaData() != null) {
-            response.setRepoMetaData(userReply.getMetaData());
         }
 
         return response;

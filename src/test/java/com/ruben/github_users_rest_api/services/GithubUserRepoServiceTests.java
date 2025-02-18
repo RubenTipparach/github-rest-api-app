@@ -60,8 +60,6 @@ public class GithubUserRepoServiceTests {
         assert reply != null;
         assert reply.getRepos() != null;
         assert reply.getUsername() != null;
-        assert reply.getRepoMetaData() != null;
-        assert reply.getUserMetaData() != null;
 
         assert reply.getUsername().equals("octocatName");
         assert reply.getRepos().getFirst().getName().equals("octocat repo");
