@@ -38,7 +38,6 @@ ____________       _____________      ____________
   * Rest controllers would work just as fine for this. WebFlux couples really well with reactive DB frameworks like Hibernate Reactive.
   
 **Tech Stack**:
-(see libraries for more detailed spring boot tech)
 * Spring Boot Starter
   * heavily relies on the spring boot libraries for asynchronous rest api calls
   * uses messaging to communicate between REST APIs and Web Clients that call out to GitHub
